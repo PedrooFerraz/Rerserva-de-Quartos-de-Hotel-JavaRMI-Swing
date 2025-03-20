@@ -7,8 +7,8 @@
 
 - [Tecnologias Utilizadas](#Tecnologias)
 - [Funcionalidades](#Funcionalidades)
-- [Requisitos](#Requisitos)
 - [Arquitetura do Sistema](#Arquitetura)
+- [Como Executar](#Como-Executar)
 - [Licenças](#Licenças)
 
 ## Tecnologias
