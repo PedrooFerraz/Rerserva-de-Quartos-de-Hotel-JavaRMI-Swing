@@ -1,9 +1,12 @@
 package rmi;
 
+import java.math.BigDecimal;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import server.model.Cliente;
+import server.model.Quarto;
 import server.model.Reserva;
 
 /**
@@ -12,16 +15,13 @@ import server.model.Reserva;
  */
 public interface ReservaHotel extends Remote {
 
-    //Retorna uma List com todos os quartos disponiveis com base na Data que o usu[ario passar como parâmetro.
-    List consultarQuartosDisponiveis(LocalDate dataEntrada, LocalDate dataSaida) throws RemoteException;
+String cadastrar (String nome, String cpf, String tipoPerfil) throws RemoteException; 
+List<Quarto> consultarQuartosDisponveis (Date data) throws RemoteException; 
+String fazerReserva (Date dataEntrada, Date dataSaida, String cpf, int quarto) throws RemoteException; 
+List<Quarto> listarQuartosDisponiveis() throws RemoteException; 
+String buscarReserva (String cpf) throws RemoteException; 
+String cancelarReserva (Long id) throws RemoteException; 
+String cadastrarQuarto (int numeroQuarto, BigDecimal valorDiaria, int tipo) throws RemoteException; 
+List<Reserva> listarReservas() throws RemoteException;
 
-    //Retorna un objeto "RespostaReserva" onde a minha ideia è ele ter no minimo 2 atributos, que seriam um int IdReserva e um bool caso a 
-    // operação seja um sucesso ou não.
-    RespostaReserva realizarReserva(int idCliente, String nomeCliente, String tipoQuarto, LocalDate dataEntrada, LocalDate dataSaida) throws RemoteException;
-
-    //Método onde passamos um idReserva e um idCliente e nos retorna un valor boolean dizendo se a operação foi um sucesso ou não.
-    Boolean cancelarReserva (int idCliente, int idReserva) throws RemoteException;
-    
-    //Método que retorna o objeto "Reserva com base no idReserva e no IdCliente passado como parâmetro.
-    Reserva consultarReserva (int idCliente, int idReserva) throws RemoteException;
 }
