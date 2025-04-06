@@ -27,11 +27,11 @@ public class ReservaHotelImpl extends UnicastRemoteObject implements ReservaHote
 
     public ReservaHotelImpl() throws RemoteException {
         super();
-        clienteHelper = new JsonHelper<>("clientes.json", new TypeToken<List<Cliente>>() {
+        clienteHelper = new JsonHelper<>("data/clientes.json", new TypeToken<List<Cliente>>() {
         }.getType());
-        quartoHelper = new JsonHelper<>("quartos.json", new TypeToken<List<Quarto>>() {
+        quartoHelper = new JsonHelper<>("data/quartos.json", new TypeToken<List<Quarto>>() {
         }.getType());
-        reservaHelper = new JsonHelper<>("reservas.json", new TypeToken<List<Reserva>>() {
+        reservaHelper = new JsonHelper<>("data/reservas.json", new TypeToken<List<Reserva>>() {
         }.getType());
 
         clientes = clienteHelper.loadList();
@@ -41,6 +41,11 @@ public class ReservaHotelImpl extends UnicastRemoteObject implements ReservaHote
 
     @Override
     public String cadastrar(String nome, String cpf) throws RemoteException {
+        for (Cliente c : clientes) {
+            if (c.getCpf().equals(cpf)) {
+                return "Erro: Já existe um cliente com este CPF.";
+            }
+        }
         Cliente cliente = new Cliente(nome, cpf);
         clientes.add(cliente);
         clienteHelper.saveList(clientes);
@@ -86,7 +91,6 @@ public class ReservaHotelImpl extends UnicastRemoteObject implements ReservaHote
     
     
     //PRECISA IMPLEMENTAR ESSE MÉTODOS ABAIXO
-    
     @Override
     public String buscarReserva(String cpf) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
