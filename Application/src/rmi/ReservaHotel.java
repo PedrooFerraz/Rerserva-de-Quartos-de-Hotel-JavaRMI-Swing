@@ -5,7 +5,6 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
-import server.model.Cliente;
 import server.model.Quarto;
 import server.model.Reserva;
 
@@ -15,7 +14,7 @@ import server.model.Reserva;
  */
 public interface ReservaHotel extends Remote {
 
-String cadastrar (String nome, String cpf, String tipoPerfil) throws RemoteException; 
+String cadastrar (String nome, String cpf) throws RemoteException; 
 List<Quarto> consultarQuartosDisponveis (Date data) throws RemoteException; 
 String fazerReserva (Date dataEntrada, Date dataSaida, String cpf, int quarto) throws RemoteException; 
 List<Quarto> listarQuartosDisponiveis() throws RemoteException; 
