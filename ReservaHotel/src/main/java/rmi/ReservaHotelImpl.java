@@ -93,22 +93,84 @@ public class ReservaHotelImpl extends UnicastRemoteObject implements ReservaHote
     //PRECISA IMPLEMENTAR ESSE MÉTODOS ABAIXO
     @Override
     public String buscarReserva(String cpf) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Criaa uma lista para guardar as reservas encontradas
+        List<Reserva> reservasCliente = new ArrayList<>();
+        
+        //Procurar todas as reservas com o CPF
+        for(Reserva r : reservas){
+            if(r.getCpfCliente().equals(cpf)){
+                // ADICIONA RESERVA NA LISTA
+                reservasCliente.add(r); 
+            }
+        }
+        
+        // SE NAO ENCONTRAR, RETORNA
+        if(reservasCliente.isEmpty()){
+            return "Nenhuma reserva encontrada para o CPF:" + cpf;
+        }
+        
+        //SE ENCONTRAR, MONTA UMA STRING COM INFORMAÇÕES
+        String resultado = "Reservas encontradas para o CPF" + cpf + ":\n";
+        for(Reserva r : reservasCliente){
+            resultado += "ID:" + r.getId()
+                    + ", Entrada:" + r.getDataEntrada()
+                    + ", Saida:" + r.getDataSaida()
+                    + ", Quarto:" + r.getQuarto() + "\n";
+    }
+        return resultado;
     }
 
     @Override
     public String cancelarReserva(Long id) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // PROCURAR A RESERVA PELO ID
+            
+        Reserva reservaEncontrada = null;
+        
+        for(Reserva r : reservas){
+            if(r.getId().equals(id)){
+                reservaEncontrada = r;
+                break;
+            }
+        }
+        
+        //Se não encontrar, mostra erro
+        if(reservaEncontrada == null){
+            return "Reserva com ID" + id + "não encontrado.";
+     }
+        
+        // Remover a reserva da lista
+        reservas.remove(reservaEncontrada);
+        
+        // SALVAR A LISTA ATUALIZADA NO ARQUIVO
+        reservaHelper.saveList(reservas);
+        return "Reserva com ID" +id + "cancelada com sucesso.";
     }
 
     @Override
     public String cadastrarQuarto(int numeroQuarto, BigDecimal valorDiaria, int tipo) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // VERIFICA SE JA EXISTE QUARTO COM O NUMERO
+        for(Quarto q : quartos){
+            if(q.getNumero() == numeroQuarto){
+                return "Erro: Já existe quarto com este numero";
+            }
+        }
+        
+        //Cria um novo objeto quarto
+        Quarto novoQuarto = new Quarto(numeroQuarto, valorDiaria, tipo);
+        
+        //Adc na lista de quartos
+        quartos.add(novoQuarto);
+        
+        //SALVA A LISTA NO ARQUIVO JSON
+        quartoHelper.saveList(quartos);
+        
+        return "Quarto numero" + numeroQuarto + "cadastrado com sucesso";
     }
-
+    
     @Override
     public List<Reserva> listarReservas() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //Devolve a lista 
+        return reservas; 
     }
 
 }
