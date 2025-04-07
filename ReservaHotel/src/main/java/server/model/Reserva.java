@@ -40,4 +40,8 @@ public class Reserva {
     public int getQuarto() {
         return quarto;
     }
+
+    public Object getCpfCliente() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
