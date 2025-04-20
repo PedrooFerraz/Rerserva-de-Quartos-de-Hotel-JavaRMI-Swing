@@ -28,6 +28,7 @@ public class HotelServerMain {
     }
     public static void main(String[] args) {
          String Ip = (args.length > 0) ? args[0] : "127.0.0.1";
+         System.out.println(args[0]);
          new HotelServerMain(Ip);
     }
     

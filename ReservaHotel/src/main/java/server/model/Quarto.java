@@ -5,8 +5,10 @@
 package server.model;
 
 import java.math.BigDecimal;
+import java.io.Serializable;
 
-public class Quarto {
+public class Quarto implements Serializable {
+
     private int numero;
     private BigDecimal valorDiaria;
     private int tipo; // 1 - Simples, 2 - Duplo, etc.
@@ -27,5 +29,28 @@ public class Quarto {
 
     public int getTipo() {
         return tipo;
+    }
+
+    public String toString() {
+        String tipoStr;
+
+        switch (tipo) {
+            case 1:
+                tipoStr = "Simples";
+                break;
+            case 2:
+                tipoStr = "Duplo";
+                break;
+            case 3:
+                tipoStr = "Suíte";
+                break;
+            default:
+                tipoStr = "Desconhecido";
+                break;
+        }
+
+        return "Quarto Nº " + numero
+                + " | Tipo: " + tipoStr
+                + " | Diária: R$ " + valorDiaria;
     }
 }

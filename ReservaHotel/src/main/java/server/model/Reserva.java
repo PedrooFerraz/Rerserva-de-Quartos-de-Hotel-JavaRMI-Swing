@@ -5,8 +5,11 @@
 package server.model;
 
 import java.util.Date;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
-public class Reserva {
+public class Reserva implements Serializable {
+
     private Long id;
     private Date dataEntrada;
     private Date dataSaida;
@@ -41,7 +44,14 @@ public class Reserva {
         return quarto;
     }
 
-    public Object getCpfCliente() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        return "Reserva ID: " + id
+                + " | Entrada: " + sdf.format(dataEntrada)
+                + " | Saída: " + sdf.format(dataSaida)
+                + " | CPF: " + cpf
+                + " | Quarto Nº: " + quarto;
     }
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package client.controller;
 
 import java.net.MalformedURLException;
@@ -21,7 +17,7 @@ public class ClientController {
     public ClientController(String Ip) {
 
         try {
-            ReservaHotel service = (ReservaHotel) Naming.lookup("rmi://" + Ip + "/HotelService");
+            service = (ReservaHotel) Naming.lookup("rmi://" + Ip + "/HotelService");
 
         } catch (MalformedURLException | NotBoundException | RemoteException e) {
             System.out.println(e);
