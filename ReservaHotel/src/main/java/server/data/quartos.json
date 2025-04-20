@@ -1,0 +1,12 @@
+[
+  {
+    "numero": 1,
+    "valorDiaria": 300,
+    "tipo": 1
+  },
+  {
+    "numero": 5,
+    "valorDiaria": 500,
+    "tipo": 3
+  }
+]

@@ -15,11 +15,11 @@
 
 - Java RMI para comunicação entre cliente e servidor
 
-- Swing ou JavaFX para a interface do cliente
+- Swing para a interface do cliente
 
-- JSON/XML/TXT para armazenamento das reservas e quartos
+- JSON para armazenamento das reservas e quartos
 
-- Java Collections para manipulação de dados temporária
+- Biblioteca GSON para manipulação de dados
 
 ## Funcionalidades
 ✅ Consultar a disponibilidade de quartos
@@ -34,9 +34,9 @@
 
 1️⃣ Clonar o Repositório
 
-2️⃣ Compilar e Iniciar o Servidor
+2️⃣ Compilar e Iniciar o Servidor passando o IP da rede como args
 
-3️⃣ Executar o Cliente
+3️⃣ Executar o Cliente e informar o IP do servidor para abrir a aplicação
 
 ## Arquitetura
 
